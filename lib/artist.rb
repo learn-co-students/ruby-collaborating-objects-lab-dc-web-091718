@@ -2,7 +2,7 @@ require 'pry'
 class Artist
 
 	attr_accessor :name
-	attr_reader :songs
+	attr_reader :songs, :all
 
 	@@all = []
 
@@ -13,11 +13,11 @@ class Artist
 	end
 
 	def add_song(song_instance)
-		@song<<song_instance
+		@songs<<song_instance
 	end
 
 	def save
-		self.all<<self
+		@@all<<self
 	end
 
 	def self.find_or_create_by_name(artist_name)
@@ -27,12 +27,14 @@ class Artist
 		end
 
 		!!artist ? artist : Artist.new(artist_name)
-
-
 	end
 
 	def self.all
 		@@all
+	end
+
+	def print_songs
+			self.songs.each do |song| puts song.name end
 	end
 
 end
